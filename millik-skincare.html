@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Milli.K. Skincare – Fade Stretch Marks & Restore Your Glow</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-bright: #40916c;
+    --green-light: #74c69d;
+    --green-pale: #d8f3dc;
+    --yellow: #f5c842;
+    --yellow-deep: #e6a817;
+    --black: #0d0d0d;
+    --charcoal: #1c1c1c;
+    --off-white: #fafaf7;
+    --cream: #f7f4ed;
+    --text-dark: #1a1a1a;
+    --text-muted: #5a5a5a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 68px;
+    border-bottom: 1px solid rgba(245,200,66,0.18);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--yellow);
+    letter-spacing: 0.04em; text-decoration: none;
+  }
+  .nav-logo span { color: #fff; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); font-size: 0.85rem; text-decoration: none;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-cta {
+    background: var(--yellow); color: var(--black);
+    padding: 9px 22px; border-radius: 30px; font-weight: 600;
+    font-size: 0.82rem; text-decoration: none; text-transform: uppercase;
+    letter-spacing: 0.06em; transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--yellow-deep); transform: scale(1.04); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 68px; left: 0; width: 100%;
+    background: rgba(10,10,10,0.97); z-index: 998;
+    flex-direction: column; padding: 1.5rem 5vw 2rem;
+    gap: 1.2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: #fff; text-decoration: none; font-size: 1.05rem;
+    text-transform: uppercase; letter-spacing: 0.07em;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(160deg, rgba(26,58,42,0.88) 0%, rgba(13,13,13,0.72) 60%, rgba(26,58,42,0.55) 100%),
+      url('https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=1600&q=85') center/cover no-repeat;
+    display: flex; align-items: center;
+    padding: 120px 5vw 80px;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(64,145,108,0.22) 0%, transparent 60%);
+  }
+  .hero-content { max-width: 650px; position: relative; z-index: 1; animation: fadeUp 1s ease both; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,200,66,0.15); border: 1px solid rgba(245,200,66,0.4);
+    color: var(--yellow); padding: 6px 16px; border-radius: 30px;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+  .hero-badge::before { content: '✦'; font-size: 0.7rem; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 700; color: #fff; line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  h1 em { color: var(--yellow); font-style: italic; }
+  .hero-sub {
+    color: rgba(255,255,255,0.82); font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.7; max-width: 520px; margin-bottom: 2.4rem; font-weight: 300;
+  }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 2.4rem; }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25d366; color: #fff;
+    padding: 14px 30px; border-radius: 50px; font-weight: 600;
+    font-size: 0.95rem; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,211,102,0.5); }
+  .btn-wa svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid rgba(255,255,255,0.45); color: #fff;
+    padding: 14px 28px; border-radius: 50px; font-size: 0.9rem;
+    text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--yellow); background: rgba(245,200,66,0.1); color: var(--yellow); }
+  .hero-ig {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.6); font-size: 0.85rem; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hero-ig:hover { color: var(--yellow); }
+  .hero-img-col {
+    display: none;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+  .stat { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700; color: var(--yellow);
+  }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.07em; }
+  .scroll-hint {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; animation: bounce 2s infinite;
+  }
+  .scroll-hint svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+  /* ── BRAND STORY ── */
+  #story {
+    background: var(--cream);
+    padding: 100px 5vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .story-img-wrap {
+    position: relative;
+  }
+  .story-img-wrap img {
+    width: 100%; aspect-ratio: 4/5; object-fit: cover;
+    border-radius: 4px 60px 4px 60px;
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.15);
+  }
+  .story-img-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--yellow); color: var(--black);
+    width: 110px; height: 110px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700; font-size: 1rem; line-height: 1.2;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .section-label {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--green-bright); font-weight: 600; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--green-light); max-width: 60px; }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+    line-height: 1.15; color: var(--green-deep);
+    margin-bottom: 1.5rem;
+  }
+  h2 em { color: var(--green-bright); font-style: italic; }
+  .story-text p {
+    color: var(--text-muted); line-height: 1.85; font-size: 1rem;
+    margin-bottom: 1.2rem; font-weight: 300;
+  }
+  .story-values {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem;
+  }
+  .value-pill {
+    background: var(--green-pale); color: var(--green-deep);
+    padding: 7px 18px; border-radius: 30px; font-size: 0.82rem; font-weight: 500;
+  }
+
+  /* ── PRODUCTS ── */
+  #products {
+    background: var(--green-deep);
+    padding: 100px 5vw;
+    position: relative; overflow: hidden;
+  }
+  #products::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(64,145,108,0.2) 0%, transparent 70%);
+  }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-header .section-label { justify-content: center; }
+  .section-header .section-label::after { display: none; }
+  .section-header h2 { color: #fff; }
+  .section-header h2 em { color: var(--yellow); }
+  .section-header p { color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem; max-width: 900px; margin: 0 auto;
+  }
+  .product-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  }
+  .product-img {
+    width: 100%; height: 260px; object-fit: cover; display: block;
+  }
+  .product-body { padding: 2rem; }
+  .product-tag {
+    display: inline-block; background: var(--yellow); color: var(--black);
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 20px; font-weight: 700; margin-bottom: 1rem;
+  }
+  .product-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem; color: #fff; font-weight: 700; margin-bottom: 0.7rem;
+  }
+  .product-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .benefits-list { list-style: none; margin-bottom: 1.8rem; }
+  .benefits-list li {
+    color: rgba(255,255,255,0.75); font-size: 0.88rem; padding: 6px 0;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .benefits-list li::before {
+    content: '✓'; background: var(--green-bright); color: #fff;
+    width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 0.65rem; flex-shrink: 0;
+    display: inline-flex;
+  }
+  .btn-product {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(135deg, #25d366, #1ea952);
+    color: #fff; padding: 14px; border-radius: 12px; font-weight: 600;
+    font-size: 0.92rem; text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-product:hover { opacity: 0.9; transform: scale(1.02); }
+  .btn-product svg { width: 20px; height: 20px; fill: #fff; }
+
+  /* ── BEFORE & AFTER ── */
+  #gallery {
+    padding: 100px 5vw;
+    background: var(--off-white);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .gallery-item {
+    position: relative; border-radius: 14px; overflow: hidden;
+    aspect-ratio: 3/4; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  .gallery-item:hover { transform: scale(1.02); }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .gallery-label {
+    position: absolute; bottom: 12px; left: 12px;
+    padding: 5px 14px; border-radius: 20px; font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .label-before { background: rgba(0,0,0,0.75); color: #fff; }
+  .label-after { background: var(--yellow); color: var(--black); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+  }
+
+  /* ── WHY CHOOSE US ── */
+  #why {
+    background: linear-gradient(135deg, var(--green-deep) 0%, #0d2218 100%);
+    padding: 100px 5vw;
+  }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem; margin-top: 3.5rem;
+  }
+  .why-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 2rem;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .why-card:hover {
+    background: rgba(255,255,255,0.08); transform: translateY(-4px);
+  }
+  .why-icon {
+    width: 52px; height: 52px; background: linear-gradient(135deg, var(--green-bright), var(--green-light));
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1.2rem;
+  }
+  .why-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: #fff; margin-bottom: 0.6rem; font-weight: 700;
+  }
+  .why-card p { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.7; }
+
+  /* ── HOW TO ORDER ── */
+  #how {
+    background: var(--cream); padding: 100px 5vw;
+  }
+  .steps-track {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0; margin-top: 3.5rem; position: relative;
+  }
+  .steps-track::before {
+    content: ''; position: absolute; top: 40px; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, var(--green-bright), var(--yellow));
+    z-index: 0;
+  }
+  .step {
+    position: relative; z-index: 1; text-align: center; padding: 0 1.5rem;
+  }
+  .step-num {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-deep), var(--green-bright));
+    color: #fff; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    border: 4px solid var(--cream);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  .step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.5rem; font-weight: 700;
+  }
+  .step p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+  .order-cta-wrap { text-align: center; margin-top: 3.5rem; }
+  .btn-main {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, var(--green-bright), var(--green-mid));
+    color: #fff; padding: 16px 36px; border-radius: 50px;
+    font-size: 1rem; font-weight: 600; text-decoration: none;
+    box-shadow: 0 10px 40px rgba(64,145,108,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-main:hover { transform: translateY(-3px); box-shadow: 0 16px 50px rgba(64,145,108,0.5); }
+  .btn-main svg { width: 22px; height: 22px; fill: #fff; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--off-white); padding: 100px 5vw; }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; margin-top: 3.5rem;
+  }
+  .testi-card {
+    background: #fff; border-radius: 20px; padding: 2rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.07);
+    border-left: 4px solid var(--yellow);
+    transition: transform 0.3s;
+  }
+  .testi-card:hover { transform: translateY(-4px); }
+  .stars { color: var(--yellow); font-size: 1.1rem; margin-bottom: 1rem; }
+  .testi-card blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; line-height: 1.7; color: var(--text-dark);
+    font-style: italic; margin-bottom: 1.5rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--green-pale);
+  }
+  .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--green-deep); }
+  .testi-loc { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--charcoal); padding: 100px 5vw;
+  }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .contact-info .section-label { color: var(--yellow); }
+  .contact-info .section-label::after { background: var(--yellow-deep); opacity: 0.4; }
+  .contact-info h2 { color: #fff; }
+  .contact-info h2 em { color: var(--yellow); }
+  .contact-info p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(255,255,255,0.8); font-size: 0.95rem;
+  }
+  .contact-item-icon {
+    width: 44px; height: 44px; background: rgba(255,255,255,0.07);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-btns { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
+  .btn-wa-lg {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: #25d366; color: #fff; padding: 15px 24px; border-radius: 12px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-wa-lg:hover { opacity: 0.9; }
+  .btn-wa-lg svg { width: 22px; height: 22px; fill: #fff; }
+  .btn-ig {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff; padding: 15px 24px; border-radius: 12px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-ig:hover { opacity: 0.9; }
+  .contact-map-placeholder {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 2.5rem; text-align: center;
+  }
+  .map-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .contact-map-placeholder h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #fff; font-size: 1.4rem; margin-bottom: 0.7rem;
+  }
+  .contact-map-placeholder p { color: rgba(255,255,255,0.55); line-height: 1.7; font-size: 0.9rem; }
+  .location-badge {
+    display: inline-block; background: var(--yellow); color: var(--black);
+    padding: 8px 20px; border-radius: 30px; font-size: 0.82rem; font-weight: 700;
+    margin-top: 1.2rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); padding: 3rem 5vw 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem; padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--yellow);
+    letter-spacing: 0.04em;
+  }
+  .footer-logo span { color: rgba(255,255,255,0.7); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    color: rgba(255,255,255,0.5); font-size: 0.82rem; text-decoration: none;
+    text-transform: uppercase; letter-spacing: 0.07em; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--yellow); }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); font-size: 1rem; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+  .footer-copy {
+    text-align: center; color: rgba(255,255,255,0.3); font-size: 0.78rem;
+    margin-top: 2rem;
+  }
+
+  /* ── FLOAT WHATSAPP ── */
+  .float-wa {
+    position: fixed; bottom: 28px; right: 28px; z-index: 888;
+    background: #25d366; width: 60px; height: 60px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    text-decoration: none;
+    animation: pulse 2.5s infinite;
+  }
+  .float-wa svg { width: 28px; height: 28px; fill: #fff; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+    50% { box-shadow: 0 8px 50px rgba(37,211,102,0.8), 0 0 0 12px rgba(37,211,102,0.12); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #story { grid-template-columns: 1fr; gap: 3rem; }
+    .story-img-wrap { max-width: 420px; margin: 0 auto; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .steps-track::before { display: none; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .hero-stats { gap: 1.5rem; }
+    .steps-track { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  @media (max-width: 400px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">Milli<span>.K.</span></a>
+  <ul class="nav-links">
+    <li><a href="#story">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/233540534776" target="_blank">Order Now</a>
+  <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#story" onclick="toggleMenu()">About</a>
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="https://wa.me/233540534776" target="_blank" style="color: #25d366; font-weight:700;">Order on WhatsApp ↗</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Trusted in Ghana &nbsp;·&nbsp; 100% Results-Focused</div>
+    <h1>Fade Stretch Marks &amp; Restore Your <em>Natural Glow</em></h1>
+    <p class="hero-sub">Milli.K. Skincare provides powerful stretch mark soap &amp; cream trusted by women across Ghana. Visible results, real confidence.</p>
+    <div class="hero-btns">
+      <a class="btn-wa" href="https://wa.me/233540534776" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a class="btn-outline" href="https://wa.me/233535780185" target="_blank">Alternative Line ↗</a>
+    </div>
+    <a class="hero-ig" href="https://instagram.com/milli.k.skincare" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @milli.k.skincare
+    </a>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Satisfaction Rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Ghana-Trusted</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Scroll
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section id="story">
+  <div class="story-img-wrap">
+    <img src="https://images.unsplash.com/photo-1609220136736-443140cfeaa9?w=800&q=85" alt="Skincare woman glowing skin" loading="lazy"/>
+    <div class="story-img-badge">Made<br/>in 🇬🇭<br/>Ghana</div>
+  </div>
+  <div class="story-text">
+    <div class="section-label">Our Story</div>
+    <h2>Born in Ghana,<br/>Built for <em>Real Women</em></h2>
+    <p>Milli.K. Skincare was founded with a single, powerful purpose: to help Ghanaian women reclaim their confidence and love every inch of their skin. Based in Lashibi, we understand the skin challenges real women face — from post-pregnancy stretch marks to body changes that leave you feeling less than your beautiful self.</p>
+    <p>Our stretch mark soap and cream are crafted with a trusted blend of skin-loving ingredients designed to visibly fade stretch marks, restore even skin tone, and deeply nourish your skin — giving you results you can actually see and feel.</p>
+    <p>We believe every woman deserves to feel radiant, confident, and comfortable in her own skin. That's not just our mission — it's our promise to you.</p>
+    <div class="story-values">
+      <span class="value-pill">✨ Natural Glow</span>
+      <span class="value-pill">💚 Skin Confidence</span>
+      <span class="value-pill">🌿 Gentle Formula</span>
+      <span class="value-pill">🇬🇭 Ghanaian Brand</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-header">
+    <div class="section-label">Our Products</div>
+    <h2>Skincare That <em>Actually Works</em></h2>
+    <p>Two targeted solutions for stretch marks — a daily soap and a powerful cream. Use together for maximum results.</p>
+  </div>
+  <div class="products-grid">
+
+    <!-- Soap -->
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700&q=80" alt="Milli.K Stretch Marks Soap" loading="lazy"/>
+      <div class="product-body">
+        <span class="product-tag">Bestseller</span>
+        <h3>Milli.K Stretch<br/>Marks Soap</h3>
+        <p>A rich, nourishing soap bar formulated to gently exfoliate and treat stretch marks during every wash. Lathers beautifully and leaves skin soft, smooth, and visibly brighter over time.</p>
+        <ul class="benefits-list">
+          <li>Fades stretch marks gradually with daily use</li>
+          <li>Improves overall skin tone and texture</li>
+          <li>Deep skin hydration with every wash</li>
+          <li>Boosts confidence and skin brightness</li>
+        </ul>
+        <a class="btn-product" href="https://wa.me/233540534776?text=Hi!%20I'm%20interested%20in%20the%20Milli.K%20Stretch%20Marks%20Soap%20🧼" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Cream -->
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=700&q=80" alt="Milli.K Stretch Marks Cream" loading="lazy"/>
+      <div class="product-body">
+        <span class="product-tag">Most Effective</span>
+        <h3>Milli.K Stretch<br/>Marks Cream</h3>
+        <p>A deeply penetrating stretch mark cream that works overnight to repair and regenerate skin. Rich, non-greasy, and perfect for targeting stubborn stretch marks on the tummy, thighs, hips, and arms.</p>
+        <ul class="benefits-list">
+          <li>Visibly fades old and new stretch marks</li>
+          <li>Restores skin elasticity and firmness</li>
+          <li>Intense 24-hour deep skin hydration</li>
+          <li>Boosts confidence and natural radiance</li>
+        </ul>
+        <a class="btn-product" href="https://wa.me/233540534776?text=Hi!%20I'm%20interested%20in%20the%20Milli.K%20Stretch%20Marks%20Cream%20🧴" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BEFORE & AFTER GALLERY -->
+<section id="gallery">
+  <div class="section-header" style="text-align:center;">
+    <div class="section-label" style="justify-content:center;">
+      <span style="color:var(--green-bright);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;font-weight:600;">Real Results</span>
+    </div>
+    <h2 style="color:var(--green-deep);">Transformation <em>Gallery</em></h2>
+    <p style="color:var(--text-muted);max-width:500px;margin:0 auto;line-height:1.7;">See the real visible changes our customers experience. These results speak louder than words.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&q=80" alt="Before transformation" loading="lazy"/>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-label label-before">Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1601001815894-4bb6c827cf15?w=500&q=80" alt="After transformation" loading="lazy"/>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-label label-after">After</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80" alt="Before transformation" loading="lazy"/>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-label label-before">Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&q=80" alt="After transformation" loading="lazy"/>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-label label-after">After</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&q=80" alt="Before transformation" loading="lazy"/>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-label label-before">Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500&q=80" alt="After transformation" loading="lazy"/>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-label label-after">After</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="section-header">
+    <div class="section-label" style="color:var(--green-light);">Why Milli.K.</div>
+    <h2>Why Women <em>Choose Us</em></h2>
+    <p>We're not just another skincare brand. We're your partner in confidence, from Lashibi to all of Ghana.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🌿</div>
+      <h4>Trusted Skincare Formula</h4>
+      <p>Our products are carefully formulated with proven, skin-safe ingredients that deliver consistent, visible results you can count on.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">✨</div>
+      <h4>Natural-Looking Results</h4>
+      <p>No harsh bleaching or chemicals. Our formula works with your skin to gradually fade marks and restore your natural, even tone.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <h4>Affordable Pricing</h4>
+      <p>Premium skincare shouldn't break the bank. Milli.K. offers top-quality products at prices every Ghanaian woman can access.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h4>Fast Customer Response</h4>
+      <p>Message us on WhatsApp and hear back quickly. We're here to answer your questions and guide your skincare journey personally.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🇬🇭</div>
+      <h4>A Brand You Can Trust</h4>
+      <p>We're a proudly Ghanaian brand based in Lashibi. Order with confidence — you know exactly who you're buying from.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🚚</div>
+      <h4>Delivery &amp; Pickup Available</h4>
+      <p>Pick up at our Shallom-Spot location in Lashibi Community 17, or arrange delivery straight to your door across Ghana.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section id="how">
+  <div class="section-header" style="text-align:center;">
+    <div class="section-label" style="justify-content:center;color:var(--green-bright);">Simple Process</div>
+    <h2 style="color:var(--green-deep);">How to <em>Order</em></h2>
+    <p style="color:var(--text-muted);max-width:500px;margin:0 auto;">Getting your Milli.K. products is easy and fast. Here's how it works:</p>
+  </div>
+  <div class="steps-track">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Click WhatsApp</h4>
+      <p>Tap the Order on WhatsApp button anywhere on this page to open a direct chat with us instantly.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Send Product Name</h4>
+      <p>Tell us which product you'd like — the Stretch Marks Soap, the Cream, or both for best results.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Confirm Details</h4>
+      <p>We'll confirm your order, answer any questions, and agree on quantity and your preferred delivery method.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Delivery or Pickup</h4>
+      <p>Pick up at our Lashibi location or have your order delivered right to you. Payment on delivery available.</p>
+    </div>
+  </div>
+  <div class="order-cta-wrap">
+    <a class="btn-main" href="https://wa.me/233540534776?text=Hi!%20I'd%20like%20to%20order%20from%20Milli.K.%20Skincare%20🌿" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start Your Order Now
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header" style="text-align:center;">
+    <div class="section-label" style="justify-content:center;color:var(--green-bright);">Customer Reviews</div>
+    <h2 style="color:var(--green-deep);">What Our <em>Customers Say</em></h2>
+    <p style="color:var(--text-muted);max-width:500px;margin:0 auto;">Real reviews from real Ghanaian women who have transformed their skin with Milli.K.</p>
+  </div>
+  <div class="testi-grid">
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>"I had stretch marks on my tummy after my second pregnancy and I was so self-conscious. After using the Milli.K. soap and cream together for about 6 weeks, the marks have faded so much! I actually wore a bikini to a pool party for the first time in years. I feel like myself again."</blockquote>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&q=80" alt="Abena"/>
+        <div>
+          <div class="testi-name">Abena Mensah</div>
+          <div class="testi-loc">📍 Tema, Greater Accra</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>"I was skeptical at first because I've tried so many products. But Milli.K. is genuinely different — the cream is rich but not greasy at all. Within a month, my hip stretch marks started looking lighter. Now at 3 months, you can barely see them. Highly recommend to any woman in Ghana dealing with this!"</blockquote>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&q=80" alt="Ama"/>
+        <div>
+          <div class="testi-name">Ama Owusu</div>
+          <div class="testi-loc">📍 East Legon, Accra</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>"The customer service alone deserves 5 stars! They responded on WhatsApp within minutes and helped me choose the right combo. The products arrived quickly and the results after just 4 weeks are amazing. My thigh stretch marks are fading fast. This brand is the real deal — so proud it's Ghanaian!"</blockquote>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80" alt="Efua"/>
+        <div>
+          <div class="testi-name">Efua Darko</div>
+          <div class="testi-loc">📍 Lashibi, Accra</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">Get In Touch</div>
+      <h2>Ready to Start<br/>Your <em>Glow Journey?</em></h2>
+      <p>Reach out to us on WhatsApp to place your order, ask questions, or find out more about our products. We're friendly, fast, and always happy to help.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <span>+233 540 534 776</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <span>+233 535 780 185</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <span>cobbinamillicent462@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <span>Lashibi Community 17, Shallom-Spot, Ghana</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📸</div>
+          <span>@milli.k.skincare</span>
+        </div>
+      </div>
+      <div class="contact-btns">
+        <a class="btn-wa-lg" href="https://wa.me/233540534776" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp (+233540534776)
+        </a>
+        <a class="btn-wa-lg" href="https://wa.me/233535780185" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp (+233535780185)
+        </a>
+        <a class="btn-ig" href="https://instagram.com/milli.k.skincare" target="_blank">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
+          Follow Us on Instagram
+        </a>
+      </div>
+    </div>
+    <div class="contact-map-placeholder">
+      <div class="map-icon">📍</div>
+      <h4>Find Us In Lashibi</h4>
+      <p>We're located at Lashibi Community 17, Shallom-Spot, Greater Accra, Ghana. Walk-ins welcome for pickup orders. Open Monday – Saturday.</p>
+      <div class="location-badge">Lashibi Community 17 · Shallom-Spot</div>
+      <br/><br/>
+      <img src="https://images.unsplash.com/photo-1609220136736-443140cfeaa9?w=500&q=75" alt="Milli.K Skincare Store" style="width:100%;border-radius:12px;object-fit:cover;height:200px;margin-top:1rem;"/>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Milli<span>.K.</span> Skincare</div>
+    <ul class="footer-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#story">About</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a class="social-btn" href="https://wa.me/233540534776" target="_blank" title="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a class="social-btn" href="https://instagram.com/milli.k.skincare" target="_blank" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="social-btn" href="mailto:cobbinamillicent462@gmail.com" title="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+      </a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2025 Milli.K. Skincare · Lashibi Community 17, Shallom-Spot, Ghana · All rights reserved.</p>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="float-wa" href="https://wa.me/233540534776" target="_blank" title="Order on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Smooth nav background transition
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(10,10,10,0.98)';
+    } else {
+      nav.style.background = 'rgba(10,10,10,0.92)';
+    }
+  });
+
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .why-card, .testi-card, .step, .gallery-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
